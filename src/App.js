@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+import NavigationBar from './Components/NavigationBar';
+import Bienvenue from './Components/Bienvenue';
+import Voiture from './Voiture';
+import VoitureListe from './VoitureListe';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <NavigationBar />
+        <Container>
+          <Row>
+            <Col>
+              <Routes>
+                <Route path="/" element={<Bienvenue />} exact />
+                <Route path="/add" element={<Voiture />} exact />
+                <Route path="/list" element={<VoitureListe />} exact />
+                {/* Route pour l'édition de voiture */}
+                <Route path="/edit/:id" element={<Voiture />} exact />
+              </Routes>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </Router>
   );
 }
 
